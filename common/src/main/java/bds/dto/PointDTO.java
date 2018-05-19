@@ -1,5 +1,9 @@
 package bds.dto;
 
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 /**
  * Created by jdev on 06.03.2017.
  */
@@ -32,12 +36,9 @@ public class PointDTO {
         this.autoId = autoId;
     }
 
-    public String toJson() {
-        return "PointDTO{" +
-                "lat=" + lat +
-                ", lon=" + lon +
-                ", autoId='" + autoId + '\'' +
-                '}';
+    public String toJson() throws JsonProcessingException {
+        ObjectMapper mapper = new ObjectMapper();
+        return mapper.writeValueAsString(this);
     }
 
     @Override
