@@ -27,3 +27,5 @@ gradle/wrapper/gradle-wrapper.properties
 gradlew
 gradlew.bat
 !/.gitignore
+!/settings.gradle
+!/build.gradle
