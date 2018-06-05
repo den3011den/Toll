@@ -3,13 +3,8 @@ package bds.services;
 import bds.GpsContext;
 import bds.dto.PointDTO;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
-import javax.annotation.PostConstruct;
-import static java.lang.System.currentTimeMillis;
-
 
 // Сервис GPS должен иметь следующие параметры:
 //
@@ -25,15 +20,19 @@ import static java.lang.System.currentTimeMillis;
 @Service
 public class GpsService {
 
+    // стартовая latGps
     private double latGps = 56.481091;
+    // приращение latGps на шаге
     private double latGpsDelta = 0.00001;
+    // стартовая lonGps
     private double lonGps = 84.978195;
+    // приращение lonGps на шаге
     private double lonGpsDelta = 0.000005;
+    // номер авто
     private String autoIdGps = "Ж777ЖД70";
 
-//    @Autowired
-//    private SavingMessagesService savingMessagesService;
-
+    // выдаёт по рассписанию параметры точки
+    // с записью в очередь сервиса SavingMessagesService
     @Scheduled(cron = "${gpstracker.peekSchedule.cron.prop}")
     private void tick() throws JsonProcessingException, InterruptedException {
 
@@ -41,9 +40,11 @@ public class GpsService {
 
         latGps = latGps + latGpsDelta;
         lonGps = lonGps + lonGpsDelta;
+
+        // конструкция объекта PointDTO с инициализацией сразу по всем полям
         PointDTO newPoint = new PointDTO(latGps, lonGps, autoIdGps, System.currentTimeMillis());
+
+        // запись в очередь сервиса ЫavingMessagesService
         GpsContext.savingMessagesService.putPointDTOIntoQueue(newPoint);
-
     }
-
 }
