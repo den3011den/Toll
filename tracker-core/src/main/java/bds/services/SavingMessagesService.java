@@ -8,6 +8,6 @@ package bds.services;
 //          На данный момент внутренняя реализация предполагает использование блокирующей очереди.
 //
 
-public class savingMessagesService {
+public class SavingMessagesService {
 
 }

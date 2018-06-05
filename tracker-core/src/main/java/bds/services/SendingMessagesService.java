@@ -4,9 +4,9 @@ package bds.services;
 //
 //       * каждую минуту (периодичность – опция настройки) отправлять накопленные данные на центральный сервер
 //          в формате json (пока реальная отправка не делается, объект забирается из очереди Сервиса хранения
-//          (savingMessagesService) и содержание объекта выводится в лог в формате json).
+//          (SavingMessagesService) и содержание объекта выводится в лог в формате json).
 //
 
 
-public class sendingMessagesService {
+public class SendingMessagesService {
 }

@@ -8,8 +8,8 @@ package bds.services;
 //          мгновенной скорости (так же как это делают настоящие приборы GPS);
 //
 //      * помещать значения широты, долготы, азимута и мгновенной скорости
-//          в очередь, предоставляемую Сервисом хранения (savingMessagesService).
+//          в очередь, предоставляемую Сервисом хранения (SavingMessagesService).
 //
 
-public class gpsService {
+public class GpsService {
 }
