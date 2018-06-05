@@ -18,12 +18,12 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 public class GpsContext {
 
     @Autowired
-    private SavingMessagesService savingMessagesService;
+    public static SavingMessagesService savingMessagesService;
 
-    @Bean
-    public SavingMessagesService savingMessagesService() {
-        return new SavingMessagesService();
-    }
+ //   @Bean
+ //   public SavingMessagesService savingMessagesService() {
+ //       return new SavingMessagesService();
+ //   }
 
     @Bean
     public GpsService gpsService() {

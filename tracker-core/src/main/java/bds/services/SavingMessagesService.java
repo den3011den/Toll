@@ -6,6 +6,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.sql.SQLOutput;
 import java.util.concurrent.BlockingDeque;
 import java.util.concurrent.LinkedBlockingDeque;
 // import java.util.concurrent.TimeUnit;
@@ -22,22 +23,28 @@ import java.util.concurrent.LinkedBlockingDeque;
 public class SavingMessagesService {
 
     // очередь
-    private BlockingDeque<String> queue =  new LinkedBlockingDeque<>(100);
+    private static BlockingDeque<String> queue =  new LinkedBlockingDeque<>(100);
     //private int putCount;
     //private long previous;
 
     // забрать из очереди
-    public PointDTO takePointDTOFromQueue() throws IOException, InterruptedException {
+    public static String takePointDTOFromQueue() throws IOException, InterruptedException {
         //log.info("take trying!!!");
 
         String jsonString = queue.take();
-        return PointDTO.fromJSON(jsonString);
+
+        System.out.println("SavingMessagesService.takePointDTOFromQueue");
+        System.out.println("Took: " + jsonString);
+
+        return jsonString;
 
     }
 
     // положить в очередь
-    public void putPointDTOIntoQueue(PointDTO gpsObject) throws JsonProcessingException, InterruptedException {
+    public static void putPointDTOIntoQueue(PointDTO gpsObject) throws JsonProcessingException, InterruptedException {
         //log.info("ScheduledQueueService.put " + i);
+        System.out.println("SavingMessagesService.putPointDTOIntoQueue");
+        System.out.println(gpsObject.toJson());
         queue.put(gpsObject.toJson());
     }
 

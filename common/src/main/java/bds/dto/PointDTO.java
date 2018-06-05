@@ -55,14 +55,14 @@ public class PointDTO {
 
     }
 
-    // из json в объект PointDTO
-    public static PointDTO fromJSON (String jsonString) throws IOException {
-
-        ObjectMapper mapper = new ObjectMapper();
-        PointDTO pointDTO = mapper.readValue(jsonString, PointDTO.class);
-        return pointDTO;
-
-    }
+//    // из json в объект PointDTO
+//    public static PointDTO fromJSON (String jsonString) throws IOException {
+//
+//        ObjectMapper mapper = new ObjectMapper();
+//        PointDTO pointDTO = mapper.readValue(jsonString, PointDTO.class);
+//        return pointDTO;
+//
+//    }
 
 
 
