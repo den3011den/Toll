@@ -1,7 +1,10 @@
 package bds.services;
 
+import bds.GpsContext;
 import bds.dto.PointDTO;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import java.io.IOException;
 import java.util.concurrent.BlockingDeque;
@@ -18,6 +21,9 @@ import java.util.concurrent.LinkedBlockingDeque;
 @Service
 public class SavingMessagesService {
 
+    // Лoг
+    private static final Logger LOG = LoggerFactory.getLogger(SavingMessagesService.class);
+
     // очередь - статическая - одна для всех
     private static BlockingDeque<String> queue =  new LinkedBlockingDeque<>(100);
 
@@ -25,16 +31,17 @@ public class SavingMessagesService {
     public static String takePointDTOFromQueue() throws IOException, InterruptedException {
 
         String jsonString = queue.take();
-        System.out.println("SavingMessagesService.takePointDTOFromQueue");
-        System.out.println("Took: " + jsonString);
+
+        LOG.info("SavingMessagesService.takePointDTOFromQueue");
+        LOG.info("Took: " + jsonString);
 
         return jsonString;
     }
 
     // положить в очередь
     public static void putPointDTOIntoQueue(PointDTO gpsObject) throws JsonProcessingException, InterruptedException {
-        System.out.println("SavingMessagesService.putPointDTOIntoQueue");
-        System.out.println(gpsObject.toJson());
+        LOG.info("SavingMessagesService.putPointDTOIntoQueue");
+        LOG.info(gpsObject.toJson());
         queue.put(gpsObject.toJson());
     }
 

@@ -16,7 +16,7 @@ import org.springframework.web.client.RestTemplate;
 //}
 
 @SpringBootApplication
-@ComponentScan({"services","bds"})
+@ComponentScan({"bds"})
 public class GpsTrackerCoreMain{
 
     public static void main(String[] args) {

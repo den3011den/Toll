@@ -20,11 +20,6 @@ public class GpsContext {
     @Autowired
     public static SavingMessagesService savingMessagesService;
 
- //   @Bean
- //   public SavingMessagesService savingMessagesService() {
- //       return new SavingMessagesService();
- //   }
-
     @Bean
     public GpsService gpsService() {
         return new GpsService();
@@ -34,6 +29,7 @@ public class GpsContext {
     public SendingMessagesService sendingMessagesService() {
         return new SendingMessagesService();
     }
+
 
     @Bean
     public TaskScheduler poolScheduler() {

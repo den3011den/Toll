@@ -17,8 +17,8 @@ import org.slf4j.LoggerFactory;
 @Service
 public class SendingMessagesService {
 
-    // Лoг - пока что просто вместо отправки на сервер
-    private static final Logger log = LoggerFactory.getLogger(SendingMessagesService.class);
+    // Лoг
+    private static final Logger LOG = LoggerFactory.getLogger(SendingMessagesService.class);
 
     // забрать из очереди точку
     private String getPointFromQueue() throws IOException, InterruptedException{
@@ -27,7 +27,7 @@ public class SendingMessagesService {
 
     // послать точку серверу
     private void sendPointToServer(String pointToSendInJson) throws IOException, InterruptedException{
-        log.info("SendingMessagesService: " + pointToSendInJson);
+        LOG.info("SendingMessagesService: " + pointToSendInJson);
     }
 
 
@@ -35,7 +35,7 @@ public class SendingMessagesService {
     @Scheduled(cron = "${gpstracker.sendSchedule.cron.prop}")
      private void tick() throws IOException, InterruptedException {
 
-        System.out.println("SendingMessagesService.tick " );
+        LOG.info("SendingMessagesService.tick");
 
         // взять точку
         String jsonPointDTO = getPointFromQueue();

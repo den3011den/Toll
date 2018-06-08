@@ -6,6 +6,8 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import de.micromata.opengis.kml.v_2_2_0.Coordinate;
 import de.micromata.opengis.kml.v_2_2_0.Placemark;
 import de.micromata.opengis.kml.v_2_2_0.Point;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import de.micromata.opengis.kml.v_2_2_0.Kml;
@@ -26,6 +28,8 @@ import java.util.List;
 @Service
 public class GpsService {
 
+    // Лoг
+    private static final Logger LOG = LoggerFactory.getLogger(GpsService.class);
 
     // индекс массива с координатами
     private int coordinateIndex = -1;
@@ -53,7 +57,7 @@ public class GpsService {
     @Scheduled(cron = "${gpstracker.peekSchedule.cron.prop}")
     private void tick() throws JsonProcessingException, InterruptedException {
 
-        System.out.println("GpsService.tick " );
+        LOG.info("GpsService.tick ");
 
         coordinateIndex = coordinateIndex + shiftIndex;
 
@@ -69,7 +73,7 @@ public class GpsService {
             coordinateIndex = 0;
         }
 
-        System.out.println(coordinateIndex);
+        LOG.info(String.valueOf(coordinateIndex));
 
         Coordinate coordinate = coordinates.get(coordinateIndex);
 
