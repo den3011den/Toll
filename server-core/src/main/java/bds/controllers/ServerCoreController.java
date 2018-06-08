@@ -10,10 +10,12 @@ import org.springframework.web.client.RestTemplate;
 @RestController
 public class ServerCoreController {
 
-    @RequestMapping(value = "/server-core/send-coords", method = RequestMethod.POST)
-    @ResponseBody
-    public PointDTO getCoords(@RequestBody PointDTO pointDTO) {
-        System.out.println("Получили: " + pointDTO.toString());
-        return pointDTO;
+    @RequestMapping(value = "/coords", method = RequestMethod.GET)
+    public void getCoords(){
+        //Response response;
+        //response = new Response("ok", true);
+        System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1");
+        //return response;
     }
- }
+
+  }

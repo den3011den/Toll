@@ -42,10 +42,11 @@ public class SendingMessagesService {
 
         RestTemplate restTemplate = new RestTemplate();
         try {
-            restTemplate.postForObject("http://localhost:8080/server-core/send-coords", pointToSendInJson, PointDTO.class);
+            PointDTO hhh =  new PointDTO(1, 1,"eee", 2222L);
+            restTemplate.postForObject("http://localhost:8080/coords", hhh, PointDTO.class);
         }
         catch (HttpClientErrorException ee) {
-            LOG.info("SendingMessagesService: cannot send. Did not find server or url: http://localhost:8080/server-core/send-coords");
+            LOG.info("SendingMessagesService: cannot send. Did not find server or url: http://localhost:8080/coords");
         }
 
     }
