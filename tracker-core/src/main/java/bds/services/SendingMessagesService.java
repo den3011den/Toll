@@ -8,14 +8,25 @@ package bds.services;
 //
 
 import bds.GpsContext;
+import bds.dto.PointDTO;
+import org.springframework.boot.web.client.RestTemplateBuilder;
+import org.springframework.context.annotation.Bean;
+import org.springframework.http.client.ClientHttpRequestFactory;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import java.io.IOException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.client.RestTemplate;
 
 @Service
 public class SendingMessagesService {
+
+    @Bean
+    public RestTemplate restTemplate(RestTemplateBuilder builder) {
+        return builder.build();
+    }
 
     // Лoг
     private static final Logger LOG = LoggerFactory.getLogger(SendingMessagesService.class);
@@ -27,7 +38,17 @@ public class SendingMessagesService {
 
     // послать точку серверу
     private void sendPointToServer(String pointToSendInJson) throws IOException, InterruptedException{
+
         LOG.info("SendingMessagesService: " + pointToSendInJson);
+
+        RestTemplate restTemplate = new RestTemplate();
+        try {
+            restTemplate.postForObject("http://localhost:8080/server-core/send-coords", pointToSendInJson, PointDTO.class);
+        }
+        catch (HttpClientErrorException ee) {
+            LOG.info("SendingMessagesService: cannot send. Did not find server or url: http://localhost:8080/server-core/send-coords");
+        }
+
     }
 
 

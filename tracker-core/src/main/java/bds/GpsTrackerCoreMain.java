@@ -23,9 +23,4 @@ public class GpsTrackerCoreMain{
         SpringApplication.run(GpsTrackerCoreMain.class, args);
     }
 
-    @Bean
-    public RestTemplate restTemplate(RestTemplateBuilder builder) {
-        return builder.build();
-    }
-
 }
