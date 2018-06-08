@@ -17,14 +17,30 @@ project(':common') {
     }
 }
 
-project(':server-core') {
+
+// для Spring Boot
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
     dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.5.3.RELEASE")
+    }
+}
+
+project(':server-core') {
+    apply plugin: 'org.springframework.boot'
+    dependencies {
+        compile("org.springframework.boot:spring-boot-devtools")
         compile project(':common')
     }
 }
 
 project(':tracker-core') {
+    apply plugin: 'org.springframework.boot'
     dependencies {
+        compile("org.springframework.boot:spring-boot-devtools")
         compile project(':common')
         // https://mvnrepository.com/artifact/org.slf4j/slf4j-api
         compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.25'
