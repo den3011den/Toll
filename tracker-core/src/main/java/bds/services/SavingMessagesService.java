@@ -1,6 +1,5 @@
 package bds.services;
 
-import bds.GpsContext;
 import bds.dto.PointDTO;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.slf4j.Logger;
