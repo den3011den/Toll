@@ -10,7 +10,6 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.scheduling.TaskScheduler;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
-
 import java.io.UnsupportedEncodingException;
 
 
@@ -32,7 +31,6 @@ public class GpsContext {
         return new SendingMessagesService();
     }
 
-
     @Bean
     public TaskScheduler poolScheduler() {
         ThreadPoolTaskScheduler scheduler = new ThreadPoolTaskScheduler();
@@ -40,7 +38,5 @@ public class GpsContext {
         scheduler.setPoolSize(20);
         return scheduler;
     }
-
-
 
 }

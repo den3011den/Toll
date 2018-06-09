@@ -18,6 +18,7 @@ import java.io.IOException;
 @PropertySource("classpath:/servercore.properties")
 public class ServerCoreController {
 
+    // путь к файлу и имя храгится в свойствах в ресурсах
     @Value("${servercore.receivedDataFilePath.prop}")
     private String receivedDataFilePath;
 
@@ -25,6 +26,8 @@ public class ServerCoreController {
     private static final Logger LOG = LoggerFactory.getLogger(ServerCoreController.class);
 
     // Запись в файл строки
+    // filePath - путь и имя файла
+    // writeString - записываемая в файл строка
     private boolean writeToFile(String filePath, String writeString) {
 
         try {
@@ -37,15 +40,17 @@ public class ServerCoreController {
             catch (IOException e) {
                 LOG.info(e.toString());
                 return false;
+        }
     }
-}
 
+    // слушаем адрес http://localhost:8080/coords, забираем объёкт и отвечаем {success:"true"}
     @RequestMapping(value = "/coords",  method = RequestMethod.POST)
     public String coords(@RequestBody PointDTO pointDTO) {
 
         LOG.info("got object: " + pointDTO.toString());
 
         writeToFile(receivedDataFilePath, pointDTO.toString() + "\n");
+        LOG.info("wrote object to : " + receivedDataFilePath);
 
         String response = "{success:\"true\"}";
         return response;

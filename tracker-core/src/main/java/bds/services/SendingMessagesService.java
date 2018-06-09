@@ -20,7 +20,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestTemplate;
-
 import java.io.IOException;
 
 @Service
@@ -44,13 +43,11 @@ public class SendingMessagesService {
 
         LOG.info("will send data to server: " + pointToSendInJson);
 
-        //String pointToSendInJsonForSend = new String(pointToSendInJson.getBytes(UTF_8).toString());
         RestTemplate restTemplate = new RestTemplate();
 
         String url = "http://localhost:8080/coords";
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON_UTF8);
-
 
         HttpEntity<String> entity = new HttpEntity<String>(pointToSendInJson, headers);
         try {
@@ -63,6 +60,7 @@ public class SendingMessagesService {
             LOG.info("cannot send. Error 404 for: http://localhost:8080/coords");
         }
     }
+
     // по рассписанию - забор точки из очереди и отправка точки серверу
     @Scheduled(cron = "${gpstracker.sendSchedule.cron.prop}")
      private void tick() throws IOException, InterruptedException {

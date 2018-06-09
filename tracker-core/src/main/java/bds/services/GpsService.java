@@ -11,11 +11,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
-
 import java.io.File;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
-
 import static java.nio.charset.StandardCharsets.UTF_8;
 
 
@@ -88,7 +86,6 @@ public class GpsService {
 
         latGps = coordinate.getLatitude();
         lonGps = coordinate.getLongitude();
-        //coordinate.getAltitude()
 
          // создание и инициализация объекта PointDTO с инициализацией сразу по всем полям
         PointDTO newPoint = new PointDTO(latGps, lonGps, autoIdGps, System.currentTimeMillis());
