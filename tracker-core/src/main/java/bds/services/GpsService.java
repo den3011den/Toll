@@ -4,15 +4,20 @@ import bds.GpsContext;
 import bds.dto.PointDTO;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import de.micromata.opengis.kml.v_2_2_0.Coordinate;
+import de.micromata.opengis.kml.v_2_2_0.Kml;
 import de.micromata.opengis.kml.v_2_2_0.Placemark;
 import de.micromata.opengis.kml.v_2_2_0.Point;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
-import de.micromata.opengis.kml.v_2_2_0.Kml;
+
 import java.io.File;
+import java.io.UnsupportedEncodingException;
 import java.util.List;
+
+import static java.nio.charset.StandardCharsets.UTF_8;
+
 
 // Сервис GPS должен иметь следующие параметры:
 //
@@ -43,13 +48,17 @@ public class GpsService {
     // долгота
     private double lonGps;
     // номер авто
-    private String autoIdGps = "Ж777ЖД70";
+
+    private String autoIdGps = new String("Ж777ЖД70".getBytes(UTF_8));
 
     //testtrack.kml
     final Kml kml = Kml.unmarshal(new File(".\\tracker-core\\src\\main\\resources\\testtrack.kml"));
     final Placemark placemark = (Placemark) kml.getFeature();
     Point point = (Point) placemark.getGeometry();
     List<Coordinate> coordinates = point.getCoordinates();
+
+    public GpsService() throws UnsupportedEncodingException {
+    }
 
 
     // выдаёт по рассписанию параметры точки

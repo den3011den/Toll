@@ -11,6 +11,8 @@ import org.springframework.scheduling.TaskScheduler;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 
+import java.io.UnsupportedEncodingException;
+
 
 @Configuration
 @EnableScheduling
@@ -21,7 +23,7 @@ public class GpsContext {
     public static SavingMessagesService savingMessagesService;
 
     @Bean
-    public GpsService gpsService() {
+    public GpsService gpsService() throws UnsupportedEncodingException {
         return new GpsService();
     }
 

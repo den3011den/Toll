@@ -4,8 +4,6 @@ package bds.dto;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import java.io.IOException;
-
 /**
  * Created by jdev on 06.03.2017.
  */
@@ -14,6 +12,11 @@ public class PointDTO {
     private double lon;
     private String autoId;
     private long time;
+
+    // конструктор по умолчанию - понадобился для перевода из json в объукть PointDTO
+    public PointDTO() {
+     }
+
 
     // конструктор с инициализацией всех полей
     public PointDTO(double lat, double lon, String autoId, long time) {
