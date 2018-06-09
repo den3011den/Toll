@@ -43,7 +43,7 @@ public class ServerCoreController {
     @RequestMapping(value = "/coords",  method = RequestMethod.POST)
     public String coords(@RequestBody PointDTO pointDTO) {
 
-        LOG.info("got object: " + pointDTO);
+        LOG.info("got object: " + pointDTO.toString());
 
         writeToFile(receivedDataFilePath, pointDTO.toString() + "\n");
 

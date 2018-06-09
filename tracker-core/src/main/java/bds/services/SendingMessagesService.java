@@ -44,11 +44,12 @@ public class SendingMessagesService {
 
         LOG.info("will send data to server: " + pointToSendInJson);
 
+        //String pointToSendInJsonForSend = new String(pointToSendInJson.getBytes(UTF_8).toString());
         RestTemplate restTemplate = new RestTemplate();
 
         String url = "http://localhost:8080/coords";
         HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.setContentType(MediaType.APPLICATION_JSON_UTF8);
 
 
         HttpEntity<String> entity = new HttpEntity<String>(pointToSendInJson, headers);
