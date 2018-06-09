@@ -66,7 +66,7 @@ public class GpsService {
     @Scheduled(cron = "${gpstracker.peekSchedule.cron.prop}")
     private void tick() throws JsonProcessingException, InterruptedException {
 
-        LOG.info("GpsService.tick ");
+        LOG.info("tick");
 
         coordinateIndex = coordinateIndex + shiftIndex;
 
@@ -82,7 +82,7 @@ public class GpsService {
             coordinateIndex = 0;
         }
 
-        LOG.info(String.valueOf(coordinateIndex));
+        LOG.info("индекс по массиву координат трека " + String.valueOf(coordinateIndex));
 
         Coordinate coordinate = coordinates.get(coordinateIndex);
 

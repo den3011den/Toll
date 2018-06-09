@@ -31,16 +31,14 @@ public class SavingMessagesService {
 
         String jsonString = queue.take();
 
-        LOG.info("SavingMessagesService.takePointDTOFromQueue");
-        LOG.info("Took: " + jsonString);
+        LOG.info("took data from queue: " + jsonString);
 
         return jsonString;
     }
 
     // положить в очередь
     public static void putPointDTOIntoQueue(PointDTO gpsObject) throws JsonProcessingException, InterruptedException {
-        LOG.info("SavingMessagesService.putPointDTOIntoQueue");
-        LOG.info(gpsObject.toJson());
+        LOG.info("put data into queue " + gpsObject.toJson());
         queue.put(gpsObject.toJson());
     }
 

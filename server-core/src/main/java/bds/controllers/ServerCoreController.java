@@ -1,60 +1,54 @@
 package bds.controllers;
 
 import bds.dto.PointDTO;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.client.RestTemplate;
+
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 
 @RestController
+@PropertySource("classpath:/servercore.properties")
 public class ServerCoreController {
 
-    private final RestTemplate restTemplate;
+    @Value("${servercore.receivedDataFilePath.prop}")
+    private String receivedDataFilePath;
 
-    public ServerCoreController(@Autowired RestTemplate restTemplate) {
-        this.restTemplate = restTemplate;
+    // Лoг
+    private static final Logger LOG = LoggerFactory.getLogger(ServerCoreController.class);
+
+    // Запись в файл строки
+    private boolean writeToFile(String filePath, String writeString) {
+
+        try {
+            FileWriter writer = new FileWriter(filePath, true);
+            BufferedWriter bufferWriter = new BufferedWriter(writer);
+            bufferWriter.write(writeString);
+            bufferWriter.close();
+            return true;
+        }
+            catch (IOException e) {
+                LOG.info(e.toString());
+                return false;
     }
-
-
-//    @RequestMapping("/coords")
-//    public PointDTO coords(){
-//        System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!11");
-//        PointDTO pointDTO = restTemplate.getForObject(
-//                "http://localhost/coord", PointDTO.class);
-//        return pointDTO;
-//    }
+}
 
     @RequestMapping(value = "/coords",  method = RequestMethod.POST)
     public String coords(@RequestBody PointDTO pointDTO) {
-        //PointDTO pointDTO = restTemplate.getForObject("http://localhost/coords", PointDTO.class);
-        //pointDTO.toString();
-        System.out.println(pointDTO);
-        System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1");
+
+        LOG.info("got object: " + pointDTO);
+
+        writeToFile(receivedDataFilePath, pointDTO.toString() + "\n");
+
         String response = "{success:\"true\"}";
         return response;
     }
 
-//    @PostMapping(path = "/coords", consumes = "application/json", produces = "application/json")
-//    public String addMember(@RequestBody PointDTO pointDTO) {
-//        System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1");
-//        String response = "{success:\"true\"}";
-//        pointDTO.toString();
-//        return response;
-//    }
-
-//    @RequestMapping(value = "/coords", method = RequestMethod.GET)
-//    @PostMapping
-//    public Response setCoords(@RequestParam(value="location") String location){
-//        System.out.println(location);
-//        Response response;
-//        if (location.split(",").length == 2) {
-//            response = new Response("ok", true);
-//        } else {
-//            response = new Response("fail", false);
-//        }
-//
-//        return response;
-//    }
   }

@@ -58,24 +58,14 @@ public class PointDTO {
 
     }
 
-//    // из json в объект PointDTO
-//    public static PointDTO fromJSON (String jsonString) throws IOException {
-//
-//        ObjectMapper mapper = new ObjectMapper();
-//        PointDTO pointDTO = mapper.readValue(jsonString, PointDTO.class);
-//        return pointDTO;
-//
-//    }
-
-
-
     @Override
     public String toString() {
-        return "PointDTO{" +
-                "lat=" + lat +
-                ", lon=" + lon +
-                ", autoId='" + autoId + '\'' +
-                '}';
+        try {
+            return toJson();
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+        return "";
     }
 
     public void setTime(long time) {
