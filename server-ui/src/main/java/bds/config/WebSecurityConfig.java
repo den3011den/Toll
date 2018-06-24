@@ -12,27 +12,31 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-      /*  http
+        http
                 .authorizeRequests()
-                .antMatchers("/", "/home").permitAll()
+                .antMatchers("/", "/home", "/routes", "/payments", "/routes/**", "/payments/**").access("hasRole('CLIENT') or hasRole('MANAGER') or hasRole('ROOT')")
+                .antMatchers("/registerClient", "/registerClient/**").access("hasRole('MANAGER') or hasRole('ROOT')")
+                .antMatchers("/registerManager", "/registerManager/**").hasRole("ROOT")
+                .antMatchers("/css", "/css/**","/img", "/img/**").permitAll()
                 .antMatchers("/error").authenticated()
-                .antMatchers("/admin").hasRole("ADMIN")
-                .anyRequest().hasRole("USER")
                 .and()
                 .formLogin()
                 .loginPage("/login")
                 .permitAll()
                 .and()
                 .logout()
-                .permitAll();*/
+                .permitAll();
     }
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        /*auth
+        auth
                 .inMemoryAuthentication()
-                .withUser("user").password("password").roles("USER")
+                .withUser("client").password("client").roles("CLIENT")
                 .and()
-                .withUser("root").password("secret").roles("ADMIN", "USER");*/
+                .withUser("manager").password("manager").roles("MANAGER")
+                .and()
+                .withUser("root").password("root").roles("ROOT");
+
     }
 }
