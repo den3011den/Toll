@@ -1,30 +1,30 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
-    <meta charset="UTF-8">
-    <title>Здравствуйте, [[${#httpServletRequest.remoteUser}]] - Server-ui (Toll system)</title>
+    <meta charset="utf-8" />
+    <title th:inline="text">Здравствуйте, [[${#httpServletRequest.remoteUser}]] - Server-ui (Toll system)</title>
 </head>
 <body>
-<h1>Добро пожаловать, [[${#httpServletRequest.remoteUser}]]!</h1>
+<h1 th:inline="text">Добро пожаловать, [[${#httpServletRequest.getRemoteUser()}]]!</h1>
 <p></p>
 <p><a th:href="@{/routes}">Маршруты</a></p>
-<p>      <a th:href="@{/routes/route1}">Маршрут 1</a></p>
-<p>      <a th:href="@{/routes/route2}">Маршрут 2</a></p>
-<p>      <a th:href="@{/routes/route3}">Маршрут 3</a></p>
-<p>      <a th:href="@{/routes/route4}">Маршрут 4</a></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a th:href="@{/routes/route1}">Маршрут 1</a></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a th:href="@{/routes/route2}">Маршрут 2</a></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a th:href="@{/routes/route3}">Маршрут 3</a></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a th:href="@{/routes/route4}">Маршрут 4</a></p>
 <p></p>
 <p><a th:href="@{/payments}">Оплаты</a></p>
-<p>      <a th:href="@{/payments/archivePayment}">Архив оплат</a></p>
-<p>      <a th:href="@{/payments/onlinePayment}">Оплатить онлайн</a></p>
-<p>      <a th:href="@{/payments/bankPayment}">Выписать счёт</a></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a th:href="@{/payments/archivePayment}">Архив оплат</a></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a th:href="@{/payments/onlinePayment}">Оплатить онлайн</a></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a th:href="@{/payments/bankPayment}">Выписать счёт</a></p>
 <p></p>
 <p><a th:href="@{/registerClient}">Зарегистрировать клиента</a></p>
-<p>      <a th:href="@{/registerClient/registerClientSimple}">Упрощённая регистрация клиента</a></p>
-<p>      <a th:href="@{/registerClient/registerClientExtended}">Расширенная регистрация клиента</a></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a th:href="@{/registerClient/registerClientSimple}">Упрощённая регистрация клиента</a></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a th:href="@{/registerClient/registerClientExtended}">Расширенная регистрация клиента</a></p>
 <p></p>
 <p><a th:href="@{/registerManager}">Зарегистрировать менеджера</a></p>
-<p>      <a th:href="@{/registerClient/registerManagerSimple}">Упрощённая регистрация менеджера</a></p>
-<p>      <a th:href="@{/registerClient/registerManagerExtended}">Расширенная регистрация менеджера</a></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a th:href="@{/registerManager/registerManagerSimple}">Упрощённая регистрация менеджера</a></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a th:href="@{/registerManager/registerManagerExtended}">Расширенная регистрация менеджера</a></p>
 <p></p>
 <input type="button" onclick="history.back();" value="Назад"/>
 <p></p>
