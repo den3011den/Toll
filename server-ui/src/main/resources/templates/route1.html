@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <title>Маршрут 1 - Server-ui (Toll system)</title>
+</head>
+<body>
+<h1>Страница маршрута 1</h1>
+<p></p>
+<input type="button" onclick="history.back();" value="Назад"/>
+<a href="#" onclick="history.back();">Назад</a>
+<p></p>
+<form th:action="@{/logout}" method="post">
+    <input type="submit" value="Выйти из системы"/>
+</form>
+</body>
+</html>

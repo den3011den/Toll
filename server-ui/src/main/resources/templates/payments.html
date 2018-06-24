@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <title>Оплаты - Server-ui (Toll system)</title>
+</head>
+<body>
+<h1>Оплаты</h1>
+<p></p>
+<p><a th:href="@{/payments/archivePayment}">Архив оплат</a></p>
+<p><a th:href="@{/payments/onlinePayment}">Оплатить онлайн</a></p>
+<p><a th:href="@{/payments/bankPayment}">Выписать счёт</a></p>
+<p></p>
+<input type="button" onclick="history.back();" value="Назад"/>
+<a href="#" onclick="history.back();">Назад</a>
+<p></p>
+<form th:action="@{/logout}" method="post">
+    <input type="submit" value="Выйти из системы"/>
+</form>
+</body>
+</html>
