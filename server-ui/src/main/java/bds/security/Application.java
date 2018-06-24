@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
-@ComponentScan("jd.config")
+@ComponentScan("bds.config")
 public class Application {
 
     public static void main(String[] args) throws Throwable {
