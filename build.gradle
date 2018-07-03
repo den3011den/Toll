@@ -56,7 +56,6 @@ project(':tracker-core') {
         compile group: 'ch.qos.logback', name: 'logback-classic', version: '1.2.2'
         // https://mvnrepository.com/artifact/de.micromata.jak/JavaAPIforKml
         compile group: 'de.micromata.jak', name: 'JavaAPIforKml', version: '2.2.1'
-        compile group: 'javax.xml.bind', name: 'jaxb-api', version: '2.2.12'
         testCompile("org.springframework.boot:spring-boot-starter-test")
         testCompile group: 'org.mockito', name: 'mockito-core', version: '2.7.22'
     }
