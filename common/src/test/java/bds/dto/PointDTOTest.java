@@ -1,37 +1,79 @@
 package bds.dto;
 
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-/**
- * Created by jdev on 06.03.2017.
- */
-public class PointDTOTest {
 
-    private String expected = "{\"lat\":56.0,\"lon\":74.0,\"autoId\":\"o567gfd\",\"time\":1526751215894}";
-    private String autoID = "o567gfd";
+
+/*
+
+    Тестовый класс для /common/src/main/java/bds/dto/PointDTO
+
+ */
+
+public class PointDTOTest {
 
     @Test
     public void toJson() throws Exception {
-        PointDTO point = new PointDTO();
-        point.setLat(56);
-        point.setLon(74);
-        point.setAutoId("o567gfd");
-        point.setTime(System.currentTimeMillis());
-        assertTrue(point.toJson().contains("\"lat\":56"));
-        assertTrue(point.toJson().contains("\"time\":"));
-        System.out.println(point.toJson());
+        PointDTO pointDTO = new PointDTO(50.1, 60.1, "вв123и70", 22222L);
+        assertEquals("{\"lat\":50.1,\"lon\":60.1,\"autoId\":\"вв123и70\",\"time\":22222}", pointDTO.toJson());
     }
 
     @Test
-    public void decodeDto() throws Exception {
-        ObjectMapper mapper = new ObjectMapper();
-        PointDTO dto = mapper.readValue(expected, PointDTO.class);
-        assertEquals(autoID, dto.getAutoId());
-        assertEquals(1526751215894L, dto.getTime());
+    public void getLat() {
+        setLat();
+    }
+
+    @Test
+    public void setLat() {
+        PointDTO pointDTO = new PointDTO();
+        pointDTO.setLat(40.1);
+        assertTrue(pointDTO.getLat() == 40.1);
+    }
+
+    @Test
+    public void getLon() {
+        setLon();
+    }
+
+    @Test
+    public void setLon() {
+        PointDTO pointDTO = new PointDTO();
+        pointDTO.setLon(20.1);
+        assertTrue(pointDTO.getLon() == 20.1);
+    }
+
+    @Test
+    public void getAutoId() {
+        setAutoId();
+    }
+
+    @Test
+    public void setAutoId() {
+        PointDTO pointDTO = new PointDTO();
+        pointDTO.setAutoId("аа555а70");
+        assertEquals("аа555а70", pointDTO.getAutoId());
+    }
+
+    @Test
+    public void toStringTest() {
+        PointDTO pointDTO = new PointDTO(50.1, 60.1, "вв123и70", 22222L);
+        assertEquals("{\"lat\":50.1,\"lon\":60.1,\"autoId\":\"вв123и70\",\"time\":22222}", pointDTO.toString());
+    }
+
+    @Test
+    public void setTime() {
+        PointDTO pointDTO = new PointDTO();
+        pointDTO.setTime(111111L);
+        assertEquals(111111L, (long) pointDTO.getTime());
+    }
+
+
+    @Test
+    public void getTime() {
+        setTime();
     }
 }
