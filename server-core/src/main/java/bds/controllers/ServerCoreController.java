@@ -45,15 +45,17 @@ public class ServerCoreController {
 
     // слушаем адрес http://localhost:8080/coords, забираем объёкт и отвечаем {success:"true"}
     @RequestMapping(value = "/coords",  method = RequestMethod.POST)
-    public String coords(@RequestBody PointDTO pointDTO) {
+    public String coords(@RequestBody PointDTO pointDTO, boolean testFlag) {
 
         LOG.info("got object: " + pointDTO.toString());
 
-        writeToFile(receivedDataFilePath, pointDTO.toString() + "\n");
+        if (testFlag != true)
+            writeToFile(receivedDataFilePath, pointDTO.toString() + "\n");
+
         LOG.info("wrote object to : " + receivedDataFilePath);
 
         String response = "{success:\"true\"}";
         return response;
     }
 
-  }
+}

@@ -76,6 +76,8 @@ project(':server-ui') {
         testCompile("junit:junit")
         testCompile("org.springframework.boot:spring-boot-starter-test")
         testCompile("org.springframework.security:spring-security-test")
+        // https://mvnrepository.com/artifact/org.chiknrice/concordion-spring-runner
+        //testCompile group: 'org.chiknrice', name: 'concordion-spring-runner', version: '1.0.0'
     }
 
     jar {
