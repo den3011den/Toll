@@ -39,7 +39,7 @@ public class SendingMessagesService {
     }
 
     // послать точку серверу
-    private void sendPointToServer(String pointToSendInJson) throws IOException, InterruptedException {
+    private String sendPointToServer(String pointToSendInJson) throws IOException, InterruptedException {
 
         LOG.info("will send data to server: " + pointToSendInJson);
 
@@ -49,9 +49,11 @@ public class SendingMessagesService {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON_UTF8);
 
+        String answer = "";
+
         HttpEntity<String> entity = new HttpEntity<String>(pointToSendInJson, headers);
         try {
-            String answer = restTemplate.postForObject(url, entity, String.class);
+            answer = restTemplate.postForObject(url, entity, String.class);
             LOG.info("sent data to server: " + pointToSendInJson);
             LOG.info("server answer: " + answer);
         } catch (ResourceAccessException ee) {
@@ -59,17 +61,20 @@ public class SendingMessagesService {
         } catch (HttpClientErrorException ee) {
             LOG.info("cannot send. Error 404 for: http://localhost:8080/coords");
         }
+
+        return answer;
     }
 
     // по рассписанию - забор точки из очереди и отправка точки серверу
     @Scheduled(cron = "${gpstracker.sendSchedule.cron.prop}")
-     private void tick() throws IOException, InterruptedException {
+     public String tick() throws IOException, InterruptedException {
 
         // взять точку
         String jsonPointDTO = getPointFromQueue();
 
         // послать точку на сервер
-        sendPointToServer(jsonPointDTO);
+        String answer = sendPointToServer(jsonPointDTO);
 
+        return answer;
      }
 }

@@ -6,15 +6,14 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 
-import static org.mockito.Matchers.isA;
 import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class MvcConfigTest {
 
-
     @Mock
     ViewControllerRegistry registry;
+
 
     @Test
      public void addViewControllers() {
@@ -25,6 +24,7 @@ public class MvcConfigTest {
         verify(mvcConfig, times(1)).addViewControllers(registry);
 
      }
+
 }
 
 
