@@ -50,7 +50,7 @@ public class GpsService {
     private String autoIdGps = new String("Ж777ЖД70".getBytes(UTF_8));
 
     //testtrack.kml
-    final Kml kml = Kml.unmarshal(new File("E:\\javadev\\Toll\\tracker-core\\src\\main\\resources\\testtrack.kml"));
+    final Kml kml = Kml.unmarshal(new File("tracker-core\\src\\main\\resources\\testtrack.kml"));
     final Placemark placemark = (Placemark) kml.getFeature();
     Point point = (Point) placemark.getGeometry();
     List<Coordinate> coordinates = point.getCoordinates();
