@@ -73,7 +73,7 @@ public class SendingMessagesService {
             log.info("NO RECORDS");
         }
 
-        all.stream().forEach(rocket -> log.info(rocket.toString()));
+        all.stream().forEach(trackPoint -> log.info(trackPoint.toString()));
     }
 
 

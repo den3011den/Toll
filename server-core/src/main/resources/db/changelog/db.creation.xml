@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+    <changeSet id="db.creation" author="bds">
+        <sql>
+            create table tracktable
+            (
+            ID         INTEGER        AUTO_INCREMENT PRIMARY KEY,
+            AUTOID     VARCHAR(20),
+            DATE       DATE           default CURRENT_DATE(),
+            TIME       TIME           default CURRENT_TIME(),
+            LATITUDE   DECIMAL(10, 6) default 0,
+            LONGTITUDE DECIMAL(10, 6) default 0
+            );
+            CREATE TABLE usertable
+            (
+            id int AUTO_INCREMENT PRIMARY KEY NOT NULL,
+            name varchar(350) NOT NULL,
+            firstname varchar(100),
+            lastname varchar(100),
+            midlename varchar(100),
+            password varchar(100),
+            archive boolean DEFAULT false ,
+            role int DEFAULT 1 NOT NULL
+            );
+            create table roletable
+            (
+            id int AUTO_INCREMENT PRIMARY KEY NOT NULL,
+            NAME    VARCHAR(100) not null,
+            ARCHIVE BOOLEAN default FALSE
+            )
+        </sql>
+    </changeSet>
+</databaseChangeLog>
