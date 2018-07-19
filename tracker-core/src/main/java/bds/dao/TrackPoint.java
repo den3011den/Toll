@@ -1,9 +1,13 @@
 package bds.dao;
 
+import bds.dto.PointDTO;
+import org.hibernate.jpa.criteria.expression.function.CurrentDateFunction;
+
 import javax.persistence.*;
 
 import java.sql.Time;
-import java.sql.Date;
+//import java.sql.Date;
+import java.util.Date;
 
 import static javax.persistence.GenerationType.AUTO;
 
@@ -21,16 +25,16 @@ public class TrackPoint {
     String autoId;
 
     @Column(name = "DATE")
-    Date date;
+    java.util.Date date;
 
     @Column(name = "TIME")
     Time time;
 
     @Column(name = "LATITUDE")
-    float latitude;
+    double latitude;
 
     @Column(name = "LONGTITUDE")
-    float longtitude;
+    double longtitude;
 
     public String toString() {
         return "TrackPoint{ id=" + id + ", autoId=" + autoId + ", date=" + date +
@@ -38,8 +42,17 @@ public class TrackPoint {
     }
 
 
-    public void setAllFields(int id, String autoId, Date date, Time time, float latitude, float longtitude) {
-        this.id = id;
+    public void setFromPointDTO(PointDTO pointDTO) {
+        //this.id = 3334;
+        this.autoId = pointDTO.getAutoId();
+        this.date = new Date(pointDTO.getTime());
+        this.time = new Time(pointDTO.getTime());
+        this.latitude = pointDTO.getLat();
+        this.longtitude = pointDTO.getLon();
+    }
+
+    public void setAllFields(String autoId, Date date, Time time, double latitude, double longtitude) {
+        //this.id = 3334;
         this.autoId = autoId;
         this.date = date;
         this.time = time;
@@ -84,7 +97,7 @@ public class TrackPoint {
         this.latitude = latitude;
     }
 
-    public float getLatitude() {
+    public double getLatitude() {
         return latitude;
     }
 
@@ -92,7 +105,7 @@ public class TrackPoint {
         this.latitude = latitude;
     }
 
-    public float getLongtitude() {
+    public double getLongtitude() {
         return longtitude;
     }
 

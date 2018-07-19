@@ -92,6 +92,10 @@ public class GpsService {
 
         // запись в очередь сервиса SavingMessagesService
         GpsContext.savingMessagesService.putPointDTOIntoQueue(newPoint);
+
+
+
+
     }
 
 }

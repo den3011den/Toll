@@ -8,10 +8,19 @@ package bds.services;
 //
 
 import bds.GpsContext;
+import bds.GpsTrackerCoreMain;
+import bds.dao.TrackPoint;
+import bds.dao.repo.TrackRepository;
+import bds.dto.PointDTO;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -21,9 +30,23 @@ import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestTemplate;
 import java.io.IOException;
+import java.util.List;
 
 @Service
+@EnableJpaRepositories("bds.dao")
+@EntityScan(basePackageClasses = bds.dao.TrackPoint.class)
 public class SendingMessagesService {
+
+    private static final Logger log = LoggerFactory.getLogger(GpsTrackerCoreMain.class);
+    static private List<TrackPoint> all;
+
+    @Bean
+    public static PropertySourcesPlaceholderConfigurer propertyConfigurer() {
+        return new PropertySourcesPlaceholderConfigurer();
+    }
+
+    @Autowired
+    TrackRepository trackRepository;
 
     @Bean
     public RestTemplate restTemplate(RestTemplateBuilder builder) {
@@ -33,9 +56,43 @@ public class SendingMessagesService {
     // Лoг
     private static final Logger LOG = LoggerFactory.getLogger(SendingMessagesService.class);
 
+
+    public void delete(TrackPoint trackPoint) {
+        trackRepository.delete(trackPoint);
+    }
+
+    public void update(TrackPoint trackPoint, PointDTO pointDTO) {
+        trackPoint.setFromPointDTO(pointDTO);
+        trackRepository.save(trackPoint);
+    }
+
+    public void read() {
+        all = (List<TrackPoint>) trackRepository.findAll();
+
+        if (all.size() == 0) {
+            log.info("NO RECORDS");
+        }
+
+        all.stream().forEach(rocket -> log.info(rocket.toString()));
+    }
+
+
+    public TrackPoint create(PointDTO pointDTO) {
+        TrackPoint trackPoint = new TrackPoint();
+        trackPoint.setFromPointDTO(pointDTO);
+        return trackRepository.save(trackPoint);
+    }
+
+
     // забрать из очереди точку
     private String getPointFromQueue() throws IOException, InterruptedException{
-        return GpsContext.savingMessagesService.takePointDTOFromQueue();
+
+        String jsonObject  = GpsContext.savingMessagesService.takePointDTOFromQueue();
+
+        ObjectMapper mapper = new ObjectMapper();
+        PointDTO pointDTO = mapper.readValue(jsonObject, PointDTO.class);
+        create(pointDTO);
+        return jsonObject;
     }
 
     // послать точку серверу
