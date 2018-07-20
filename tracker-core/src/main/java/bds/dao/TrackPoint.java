@@ -1,15 +1,14 @@
 package bds.dao;
 
 import bds.dto.PointDTO;
-import org.hibernate.jpa.criteria.expression.function.CurrentDateFunction;
 
 import javax.persistence.*;
-
 import java.sql.Time;
-//import java.sql.Date;
 import java.util.Date;
 
 import static javax.persistence.GenerationType.AUTO;
+
+//import java.sql.Date;
 
 
 @Entity
@@ -52,7 +51,6 @@ public class TrackPoint {
     }
 
     public void setAllFields(String autoId, Date date, Time time, double latitude, double longtitude) {
-        //this.id = 3334;
         this.autoId = autoId;
         this.date = date;
         this.time = time;
@@ -93,7 +91,7 @@ public class TrackPoint {
         return time;
     }
 
-    public void setLatitude(float latitude) {
+    public void setLatitude(double latitude) {
         this.latitude = latitude;
     }
 
@@ -101,7 +99,7 @@ public class TrackPoint {
         return latitude;
     }
 
-    public void setLongtitude(float latitude) {
+    public void setLongtitude(double latitude) {
         this.latitude = latitude;
     }
 

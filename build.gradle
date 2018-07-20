@@ -85,6 +85,9 @@ project(':tracker-core') {
 
         compile("org.springframework:spring-jdbc")
 
+       // compile("org.springframework.boot:spring-boot-configuration-processor")
+        //compileJava.dependsOn(processResources)
+
         testCompile("org.springframework.boot:spring-boot-starter-test")
         testCompile group: 'org.mockito', name: 'mockito-core', version: '2.7.22'
     }

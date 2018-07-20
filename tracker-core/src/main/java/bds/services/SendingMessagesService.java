@@ -37,6 +37,9 @@ import java.util.List;
 @EntityScan(basePackageClasses = bds.dao.TrackPoint.class)
 public class SendingMessagesService {
 
+    @Autowired
+    TrackRepository trackRepository;
+
     private static final Logger log = LoggerFactory.getLogger(GpsTrackerCoreMain.class);
     static private List<TrackPoint> all;
 
@@ -44,9 +47,6 @@ public class SendingMessagesService {
     public static PropertySourcesPlaceholderConfigurer propertyConfigurer() {
         return new PropertySourcesPlaceholderConfigurer();
     }
-
-    @Autowired
-    TrackRepository trackRepository;
 
     @Bean
     public RestTemplate restTemplate(RestTemplateBuilder builder) {
@@ -80,6 +80,7 @@ public class SendingMessagesService {
     public TrackPoint create(PointDTO pointDTO) {
         TrackPoint trackPoint = new TrackPoint();
         trackPoint.setFromPointDTO(pointDTO);
+        //System.out.println(trackPoint.toString());
         return trackRepository.save(trackPoint);
     }
 

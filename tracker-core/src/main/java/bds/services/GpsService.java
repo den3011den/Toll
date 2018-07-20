@@ -11,9 +11,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
+
 import java.io.File;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
+
 import static java.nio.charset.StandardCharsets.UTF_8;
 
 
@@ -50,7 +52,7 @@ public class GpsService {
     private String autoIdGps = new String("Ж777ЖД70".getBytes(UTF_8));
 
     //testtrack.kml
-    final Kml kml = Kml.unmarshal(new File("tracker-core\\src\\main\\resources\\testtrack.kml"));
+    final Kml kml = Kml.unmarshal(new File(".\\tracker-core\\src\\main\\resources\\testtrack.kml"));
     final Placemark placemark = (Placemark) kml.getFeature();
     Point point = (Point) placemark.getGeometry();
     List<Coordinate> coordinates = point.getCoordinates();
