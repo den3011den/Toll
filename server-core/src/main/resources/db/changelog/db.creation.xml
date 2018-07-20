@@ -24,12 +24,18 @@
             archive boolean DEFAULT false ,
             role int DEFAULT 1 NOT NULL
             );
+            INSERT INTO PUBLIC.USERTABLE (ID, NAME, FIRSTNAME, LASTNAME, MIDLENAME, PASSWORD, ARCHIVE, ROLE) VALUES (1, 'clientName', 'clientFirstname', 'clientLastname', 'clientMidlename', '111', false, 1);
+            INSERT INTO PUBLIC.USERTABLE (ID, NAME, FIRSTNAME, LASTNAME, MIDLENAME, PASSWORD, ARCHIVE, ROLE) VALUES (2, 'managerName', 'clientFirstname', 'managerLastname', 'managerMidlename', '111', false, 2);
+            INSERT INTO PUBLIC.USERTABLE (ID, NAME, FIRSTNAME, LASTNAME, MIDLENAME, PASSWORD, ARCHIVE, ROLE) VALUES (3, 'rootName', 'rootFirstname', 'rootLastname', 'rootMidlename', '111', false, 3);
             create table roletable
             (
             id int AUTO_INCREMENT PRIMARY KEY NOT NULL,
             NAME    VARCHAR(100) not null,
             ARCHIVE BOOLEAN default FALSE
-            )
+            );
+            INSERT INTO PUBLIC.ROLETABLE (ID, NAME, ARCHIVE) VALUES (1, 'CLIENT', false);
+            INSERT INTO PUBLIC.ROLETABLE (ID, NAME, ARCHIVE) VALUES (2, 'MANAGER', false);
+            INSERT INTO PUBLIC.ROLETABLE (ID, NAME, ARCHIVE) VALUES (3, 'ROOT', false);
         </sql>
     </changeSet>
 </databaseChangeLog>
