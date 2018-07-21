@@ -101,7 +101,6 @@ public class ServerCoreController {
         allTracks.stream().forEach(userrecord -> log.info(userrecord.toString()));
     }
 
-
     public UserRecord createUserRecord(UserRecord userRecord) {
          return userRepository.save(userRecord);
     }
@@ -129,9 +128,6 @@ public class ServerCoreController {
     public RoleRecord createRoleRecord(RoleRecord roleRecord) {
         return roleRepository.save(roleRecord);
     }
-
-
-
 
     // путь к файлу и имя храгится в свойствах в ресурсах
     @Value("${servercore.receivedDataFilePath.prop}")
