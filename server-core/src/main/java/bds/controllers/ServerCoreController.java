@@ -7,6 +7,9 @@ import bds.dao.repo.RoleRepository;
 import bds.dao.repo.TrackRepository;
 import bds.dao.repo.UserRepository;
 import bds.dto.PointDTO;
+import bds.dto.RequestAutoIDTrack;
+import bds.dto.ResponseAutoIDTrack;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +27,8 @@ import org.springframework.web.bind.annotation.RestController;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.ParseException;
+import java.util.Collections;
 import java.util.List;
 
 @RestController
@@ -65,14 +70,16 @@ public class ServerCoreController {
         trackRepository.save(trackPoint);
     }
 
-    public void readTrackPointAll() {
+    public boolean readTrackPointAll() {
         allTracks = (List<TrackPoint>) trackRepository.findAll();
 
         if (allTracks.size() == 0) {
             log.info("NO RECORDS");
+            return false;
         }
 
         allTracks.stream().forEach(trackPoint -> log.info(trackPoint.toString()));
+        return true;
     }
 
 
@@ -170,5 +177,59 @@ public class ServerCoreController {
         String response = "{success:\"true\"}";
         return response;
     }
+
+    // слушаем адрес http://localhost:8080/coordsbyautoid, забираем объёкт, отвечаем
+    @RequestMapping(value = "/coordsbyautoid",  method = RequestMethod.POST)
+    public String coordsByAutoid(@RequestBody RequestAutoIDTrack requestAutoIDTrack) throws ParseException, JsonProcessingException {
+
+        LOG.info("/coordsbyautoid");
+        LOG.info("got request: " + requestAutoIDTrack.toString());
+
+        boolean rezvar = readTrackPointAll();
+
+        ResponseAutoIDTrack responseAutoIDTrack = new ResponseAutoIDTrack();
+
+        if (!rezvar) {
+            responseAutoIDTrack.setAutoId(requestAutoIDTrack.getAutoId());
+            responseAutoIDTrack.setLastPointsQuantity(requestAutoIDTrack.getLastPointsQuantity());
+            responseAutoIDTrack.setSuccess("false");
+            responseAutoIDTrack.setInfo("NO DATA IN DATABASE TABLE");
+        }
+        else {
+            Collections.sort(allTracks, (TrackPoint a1, TrackPoint a2) -> a2.getId()-a1.getId());
+            int countVar = 0;
+            for( TrackPoint trackPoint : allTracks) {
+                if (trackPoint.getAutoId().equalsIgnoreCase(requestAutoIDTrack.getAutoId())) {
+                    countVar++;
+                    responseAutoIDTrack.addPoint(trackPoint.toPointDTO());
+                    if (countVar==requestAutoIDTrack.getLastPointsQuantity()) {
+                        break;
+                    }
+                }
+            }
+            if (countVar == 0) {
+                responseAutoIDTrack.setAutoId(requestAutoIDTrack.getAutoId());
+                responseAutoIDTrack.setLastPointsQuantity(requestAutoIDTrack.getLastPointsQuantity());
+                responseAutoIDTrack.setSuccess("false");
+                responseAutoIDTrack.setInfo("NO DATA FIT TO CONDITIONS");
+            }
+            else {
+                responseAutoIDTrack.setAutoId(requestAutoIDTrack.getAutoId());
+                responseAutoIDTrack.setLastPointsQuantity(requestAutoIDTrack.getLastPointsQuantity());
+                responseAutoIDTrack.setSuccess("true");
+                responseAutoIDTrack.setInfo("response consists of " + countVar + "records");
+
+            }
+
+        }
+
+        String response = responseAutoIDTrack.toJson();
+
+        LOG.info("response : " + response);
+
+        return response;
+    }
+
+
 
 }

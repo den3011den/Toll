@@ -4,9 +4,12 @@ import bds.dto.PointDTO;
 
 import javax.persistence.*;
 import java.sql.Time;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import static javax.persistence.GenerationType.AUTO;
+import static org.aspectj.bridge.Version.getTime;
 
 @Entity
 @Table(name="tracktable")
@@ -36,6 +39,21 @@ public class TrackPoint {
         return "TrackPoint{ id=" + id + ", autoId=" + autoId + ", date=" + date +
                 ", time=" + time + ", latitude=" + latitude + ", longtitude=" + longtitude + " }";
     }
+
+
+    public PointDTO toPointDTO() throws ParseException {
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd 00:00:00.0 hh:mm:ss");
+
+        //System.out.println("========>>>>>>>" + date.toString() + " " + time.toString());
+
+        Date dateParse = sdf.parse("" + date.toString() + " " + time.toString());
+        Long timeParse = dateParse.getTime();
+        //System.out.println("~~~~~~~~~>>>>>>>" + (new Date(timeParse)).toString());
+
+        return new PointDTO(latitude, longtitude, autoId, timeParse);
+     }
+
 
 
     public void setFromPointDTO(PointDTO pointDTO) {
