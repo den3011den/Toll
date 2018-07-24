@@ -114,6 +114,11 @@ project(':server-ui') {
         testCompile("junit:junit")
         testCompile("org.springframework.boot:spring-boot-starter-test")
         testCompile("org.springframework.security:spring-security-test")
+
+        // https://mvnrepository.com/artifact/org.springframework/spring-jdbc
+        compile group: 'org.springframework', name: 'spring-jdbc', version: '4.3.8.RELEASE'
+        compile group: 'com.h2database', name: 'h2', version: '1.4.195'
+
         // https://mvnrepository.com/artifact/org.chiknrice/concordion-spring-runner
         //testCompile group: 'org.chiknrice', name: 'concordion-spring-runner', version: '1.0.0'
     }
