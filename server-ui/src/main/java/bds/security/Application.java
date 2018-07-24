@@ -9,7 +9,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.PropertySource;
 
 @SpringBootApplication
-@ComponentScan({"bds.config","bds.services"})
+@ComponentScan({"bds.config","bds.services","bds.controllers"})
 @PropertySource("classpath:/serverui.properties")
 public class Application implements CommandLineRunner {
 

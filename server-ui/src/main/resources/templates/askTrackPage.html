@@ -1,0 +1,33 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <title>Server-ui - Ask Track Page</title>
+</head>
+
+<body>
+<h2>Запрос последних точек трэка по номеру авто</h2>
+
+<div th:if="${errorMessage!=null}"
+     style="color:red;font-style:italic" th:utext="${errorMessage}">..</div>
+
+<form th:action="@{/askTrack}" th:object="${askTrackForm}" method="POST">
+    <table>
+
+        <tr>
+            <td>Введите номер авто</td>
+            <td><input type="text" th:field="*{autoId}"/></td>
+        </tr>
+        <tr>
+            <td>Введите количество последних точек</td>
+            <td><input type="number" th:field="*{lastPointsQuantity}"/></td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td><input type="submit" value="Запрос"/></td>
+        </tr>
+    </table>
+</form>
+
+</body>
+</html>

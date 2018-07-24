@@ -16,7 +16,7 @@ public class ResponseAutoIDTrack {
     private String info;
     private String autoId;
     private int lastPointsQuantity;
-    private List<PointDTO> Points = new ArrayList<PointDTO>();
+    private List<PointDTO> points = new ArrayList<PointDTO>();
 
     public ResponseAutoIDTrack(){ }
 
@@ -46,12 +46,12 @@ public class ResponseAutoIDTrack {
     }
 
     public void addPoint(PointDTO pointDTO) {
-        Points.add(pointDTO);
+        points.add(pointDTO);
     }
 
     public PointDTO getPoint(int listIndex) {
-        if (listIndex < Points.size())
-            return Points.get(listIndex);
+        if (listIndex < points.size())
+            return points.get(listIndex);
         else
             return new PointDTO();
     }
@@ -90,11 +90,11 @@ public class ResponseAutoIDTrack {
     }
 
     public List<PointDTO> getPoints() {
-        return Points;
+        return points;
     }
 
     public void setPoints(List<PointDTO> points) {
-        Points = points;
+        this.points = points;
     }
 
 }

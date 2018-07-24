@@ -1,0 +1,39 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <title>Результаты запроса - Server-ui</title>
+
+    <style>
+        th, td {
+            padding: 5px;
+        }
+    </style>
+
+</head>
+
+<body>
+
+
+<h2>Результаты запроса</h2>
+
+<p>Результат: <span th:text="${responseAutoIDTrack.success}"></span></p>
+<p>Инфо: <span th:text="${responseAutoIDTrack.info}"></span></p>
+<p>Номер авто: <span th:text="${responseAutoIDTrack.autoId}"></span></p>
+<p>Количество последних точек трэка: <span th:text="${responseAutoIDTrack.lastPointsQuantity}"></span></p>
+
+<table border="1">
+    <tr>
+        <th>Широта</th>
+        <th>Долгота</th>
+        <th>Время</th>
+    </tr>
+    <tr th:each="point : ${responseAutoIDTrack.points}">
+        <td th:utext="${point.lat}">..</td>
+        <td th:utext="${point.lon}">..</td>
+        <td th:utext="${point.time}">..</td>
+    </tr>
+
+</table>
+</body>
+</html>
