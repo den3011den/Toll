@@ -46,6 +46,20 @@ public class MainController {
     }
 
 
+    @RequestMapping(value = "/delTrackPage", method = RequestMethod.GET)
+    public String delTrackPage(Model model) {
+
+        return "notDone";
+    }
+
+    @RequestMapping(value = "/editTrackPage", method = RequestMethod.GET)
+    public String editTrackPage(Model model) {
+
+        return "notDone";
+    }
+
+
+
     @RequestMapping(value = "/addTrackPage", method = RequestMethod.GET)
     public String viewAddTrackPage(Model model) {
 

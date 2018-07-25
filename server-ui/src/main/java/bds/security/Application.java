@@ -17,13 +17,4 @@ public class Application {
         SpringApplication.run(Application.class, args);
     }
 
-//    @Override
-//    public void run(String... args) throws Exception {
-//
-//        SendingRequestService sendingRequestService = new SendingRequestService();
-//        RequestAutoIDTrack requestAutoIDTrack = new RequestAutoIDTrack("Ж777ЖД70", 5);
-//        String gotAnswer = sendingRequestService.sendTrackRequestToServer(requestAutoIDTrack);
-//        //System.out.println("--->>>  gotAnswer === " + gotAnswer);
-//
-//    }
 }
