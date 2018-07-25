@@ -22,6 +22,8 @@
 <p>Номер авто: <span th:text="${responseAutoIDTrack.autoId}"></span></p>
 <p>Количество последних точек трэка: <span th:text="${responseAutoIDTrack.lastPointsQuantity}"></span></p>
 
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a th:href="@{/askTrack}">Запрос последник точек трэка по номеру авто</a></p>
+
 <table border="1">
     <tr>
         <th>Широта</th>
@@ -33,7 +35,11 @@
         <td th:utext="${point.lon}">..</td>
         <td th:utext="${point.time}">..</td>
     </tr>
-
 </table>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a th:href="@{/addTrackPage}">Добавить точку</a></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a th:href="@{/delTrackPage}">Удалить точку</a></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a th:href="@{/editTrackPage}">Редактировать точку</a></p>
+
 </body>
 </html>

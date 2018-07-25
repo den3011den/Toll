@@ -7,6 +7,7 @@ import bds.dao.repo.RoleRepository;
 import bds.dao.repo.TrackRepository;
 import bds.dao.repo.UserRepository;
 import bds.dto.PointDTO;
+import bds.dto.RequestAddingPoint;
 import bds.dto.RequestAutoIDTrack;
 import bds.dto.ResponseAutoIDTrack;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -177,6 +178,30 @@ public class ServerCoreController {
         String response = "{success:\"true\"}";
         return response;
     }
+
+
+
+    // слушаем адрес http://localhost:8080/addingtrackpoint, забираем объёкт, записываем в базу
+    @RequestMapping(value = "/addingtrackpoint",  method = RequestMethod.POST)
+    public String coordsByAutoid(@RequestBody RequestAddingPoint requestAddingPoint) throws ParseException, JsonProcessingException {
+
+        LOG.info("/addingtrackpoint");
+        LOG.info("got request: " + requestAddingPoint.toString());
+
+        PointDTO pointDTO = new PointDTO(requestAddingPoint.getLat(), requestAddingPoint.getLon(), requestAddingPoint.getAutoId(), requestAddingPoint.getTime());
+
+        createTrackPoint(pointDTO);
+
+        RequestAutoIDTrack requestAutoIDTrack = new RequestAutoIDTrack(requestAddingPoint.getAutoId(), 10);
+
+        String response = requestAutoIDTrack.toJson();
+
+        LOG.info("response : " + response);
+
+        return response;
+    }
+
+
 
     // слушаем адрес http://localhost:8080/coordsbyautoid, забираем объёкт, отвечаем
     @RequestMapping(value = "/coordsbyautoid",  method = RequestMethod.POST)

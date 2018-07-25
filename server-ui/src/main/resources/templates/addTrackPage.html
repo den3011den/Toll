@@ -1,0 +1,39 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <title>Server-ui - Add Track Page</title>
+</head>
+
+<body>
+<h2>Добавление точки трека</h2>
+
+<div th:if="${errorMessage!=null}"
+     style="color:red;font-style:italic" th:utext="${errorMessage}">..</div>
+
+<form th:action="@{/addTrack}" th:object="${addTrackForm}" method="POST">
+    <table>
+        <tr>
+            <td>Введите номер авто</td>
+            <td><input type="text" th:field="*{autoId}"/></td>
+        </tr>
+         <tr>
+            <td>Введите широту</td>
+            <td><input type="number" th:field="*{lat}"/></td>
+        </tr>
+        <tr>
+            <td>Введите долготу</td>
+            <td><input type="number" th:field="*{lon}"/></td>
+        </tr>
+        <tr>
+            <td>Введите время</td>
+            <td><input type="number" th:field="*{time}"/></td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td><input type="submit" value="Добавить"/></td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>

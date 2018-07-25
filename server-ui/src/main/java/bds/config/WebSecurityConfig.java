@@ -21,7 +21,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/", "/home", "/routes", "/payments", "/routes/**", "/payments/**","/askTrack", "/askTrackPage", "/showTrackPage").access("hasRole('CLIENT') or hasRole('MANAGER') or hasRole('ROOT')")
+                .antMatchers("/", "/home", "/routes", "/payments", "/routes/**", "/payments/**","/askTrack", "/askTrackPage", "/showTrackPage","/addTrackPage","/addTrack").access("hasRole('CLIENT') or hasRole('MANAGER') or hasRole('ROOT')")
                 .antMatchers("/registerClient", "/registerClient/**").access("hasRole('MANAGER') or hasRole('ROOT')")
                 .antMatchers("/registerManager", "/registerManager/**").hasRole("ROOT")
                 .antMatchers("/css", "/css/**","/img", "/img/**").permitAll()
